@@ -1075,7 +1075,7 @@ public class World implements IBlockAccess {
             }
 
             if (!entity.B) {
-                this.e(entity);
+                this.f(entity);
             }
 
             if (entity.B) {
@@ -1097,47 +1097,26 @@ public class World implements IBlockAccess {
         }
     }
 
-    protected void e(Entity entity) {
+    public void f(Entity entity) {
+        this.e(entity, true);
+    }
+
+    protected void e(Entity entity, boolean flag) {
         int i = MathHelper.b(entity.l);
         int j = MathHelper.b(entity.n);
         byte b0 = 16;
 
-        if (this.a(i - b0, 0, j - b0, i + b0, 128, j + b0)) {
+        if (flag || this.a(i - b0, 0, j - b0, i + b0, 128, j + b0)) {
             entity.J = entity.l;
             entity.K = entity.m;
             entity.L = entity.n;
             entity.t = entity.r;
             entity.u = entity.s;
-            if (entity.g != null) {
-                entity.v();
-            } else {
-                entity.b_();
-            }
-
-            int k = MathHelper.b(entity.l / 16.0D);
-            int l = MathHelper.b(entity.m / 16.0D);
-            int i1 = MathHelper.b(entity.n / 16.0D);
-
-            if (!entity.Z || entity.aa != k || entity.ab != l || entity.ac != i1) {
-                if (entity.Z && this.g(entity.aa, entity.ac)) {
-                    this.b(entity.aa, entity.ac).a(entity, entity.ab);
-                }
-
-                if (this.g(k, i1)) {
-                    this.b(k, i1).a(entity);
+            if (flag && entity.Z) {
+            	if (entity.g != null) {
+                    entity.v();
                 } else {
-                    entity.Z = false;
-                    System.out.println("Removing entity because it\'s not in a chunk!!");
-                    entity.j();
-                }
-            }
-
-            if (entity.f != null) {
-                if (!entity.f.B && entity.f.g == entity) {
-                    this.e(entity.f);
-                } else {
-                    entity.f.g = null;
-                    entity.f = null;
+                    entity.b_();
                 }
             }
 
@@ -1159,6 +1138,33 @@ public class World implements IBlockAccess {
 
             if (Double.isNaN((double) entity.r) || Double.isInfinite((double) entity.r)) {
                 entity.r = entity.t;
+            }
+
+            int k = MathHelper.b(entity.l / 16.0D);
+            int l = MathHelper.b(entity.m / 16.0D);
+            int i1 = MathHelper.b(entity.n / 16.0D);
+
+            if (!entity.Z || entity.aa != k || entity.ab != l || entity.ac != i1) {
+                if (entity.Z && this.g(entity.aa, entity.ac)) {
+                    this.b(entity.aa, entity.ac).a(entity, entity.ab);
+                }
+
+                if (this.g(k, i1)) {
+                    this.b(k, i1).a(entity);
+                } else {
+                    entity.Z = false;
+                    System.out.println("Removing entity because it\'s not in a chunk!!");
+                    entity.j();
+                }
+            }
+
+            if (flag && entity.Z && entity.f != null) {
+                if (!entity.f.B && entity.f.g == entity) {
+                    this.f(entity.f);
+                } else {
+                    entity.f.g = null;
+                    entity.f = null;
+                }
             }
         }
     }

@@ -30,6 +30,17 @@ public class WorldServer extends World {
         this.D.a(this);
     }
 
+    public void a(Entity entity, boolean flag) {
+
+        if (entity.f == null || !(entity.f instanceof EntityHuman)) {
+            super.e(entity, flag);
+        }
+    }
+
+    public void b(Entity entity, boolean flag) {
+        super.e(entity, flag);
+    }
+
     protected IChunkProvider a(File file1) {
         this.y = new ChunkProviderServer(this, new ChunkLoader(file1, true), new ChunkProviderGenerate(this, this.t));
         return this.y;

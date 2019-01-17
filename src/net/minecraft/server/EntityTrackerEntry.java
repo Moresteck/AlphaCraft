@@ -47,12 +47,12 @@ public class EntityTrackerEntry {
     public void a(List list) {
         this.j = false;
         if (!this.o || this.a.d(this.l, this.m, this.n) > 16.0D) {
-            this.b(list);
             this.l = this.a.l;
             this.m = this.a.m;
             this.n = this.a.n;
             this.o = true;
             this.j = true;
+            this.b(list);
         }
 
         if (this.i++ % this.c == 0) {
@@ -136,6 +136,12 @@ public class EntityTrackerEntry {
 
     public void a() {
         this.a((Packet) (new Packet29DestroyEntity(this.a.c)));
+    }
+
+    public void aNew(EntityPlayer entityplayer) {
+        if (this.k.contains(entityplayer)) {
+            this.k.remove(entityplayer);
+        }
     }
 
     public void a(EntityPlayer entityplayer) {

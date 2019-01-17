@@ -79,11 +79,17 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
 
                 this.e.w = packet10flying.g;
                 this.e.i();
+                this.e.c(d5, 0.0D, d4);
                 this.e.b(d1, d2, d3, f, f1);
                 this.e.o = d5;
                 this.e.q = d4;
-                this.e.g.b_();
+                this.d.e.b(this.e.g, true);
+                this.e.g.w();
                 this.d.f.b(this.e);
+                this.g = this.e.l;
+                this.h = this.e.m;
+                this.i = this.e.n;
+                this.d.e.f(this.e);
                 return;
             }
             // ALPHACRAFT END
@@ -455,12 +461,7 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
             }
         } else {
             int i;
-
-            if (s.toLowerCase().equalsIgnoreCase("/home")) {
-                a.info(this.e.aq + " returned home");
-                i = this.d.e.d(this.d.e.n, this.d.e.p);
-                this.a((double) this.d.e.n + 0.5D, (double) i + 1.5D, (double) this.d.e.p + 0.5D, 0.0F, 0.0F);
-            } else if (s.toLowerCase().equalsIgnoreCase("/iron")) {
+            if (s.toLowerCase().equalsIgnoreCase("/iron")) {
                 if (MinecraftServer.b.containsKey(this.e.aq)) {
                     a.info(this.e.aq + " failed to iron!");
                     this.b((Packet) (new Packet3Chat("\u00A7cYou can\'t /iron again so soon!")));

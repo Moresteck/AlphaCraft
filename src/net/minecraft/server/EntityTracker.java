@@ -64,11 +64,22 @@ public class EntityTracker {
     }
 
     public void b(Entity entity) {
-        EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) this.b.d(entity.c);
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer entityplayer = (EntityPlayer) entity;
+            Iterator iterator = this.a.iterator();
 
-        if (entitytrackerentry != null) {
-            this.a.remove(entitytrackerentry);
-            entitytrackerentry.a();
+            while (iterator.hasNext()) {
+                EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) iterator.next();
+
+                entitytrackerentry.a(entityplayer);
+            }
+        }
+
+        EntityTrackerEntry entitytrackerentry1 = (EntityTrackerEntry) this.b.d(entity.c);
+
+        if (entitytrackerentry1 != null) {
+            this.a.remove(entitytrackerentry1);
+            entitytrackerentry1.a();
         }
     }
 

@@ -93,7 +93,7 @@ public class ItemInWorldManager {
         }
 
         if (flag && this.a.b(Block.n[l])) {
-            Block.n[l].a_(this.b, i, j, k, i1);
+            Block.n[l].g(this.b, i, j, k, i1);
         }
 
         return flag;
