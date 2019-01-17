@@ -9,6 +9,7 @@ public class EntityTrackerEntry {
 
     public Entity a;
     public boolean bNew = false;
+    public boolean dNew = false;
     public int b;
     public int c;
     public int d;
@@ -44,11 +45,6 @@ public class EntityTrackerEntry {
     }
 
     public void a(List list) {
-    	if (this.a.z) {
-            this.a((Packet) (new Packet18ArmAnimation(this.a, 2)));
-            this.a.z = false;
-        }
-
         this.j = false;
         if (!this.o || this.a.d(this.l, this.m, this.n) > 16.0D) {
             this.b(list);
@@ -93,10 +89,20 @@ public class EntityTrackerEntry {
             // ALPHACRAFT
             if (this.bNew && this.a.g == null) {
                 this.bNew = false;
-                this.a((Packet) (new Packet18ArmAnimation(this.a, 3))); // 3-101
+                this.a((Packet) (new Packet18ArmAnimation(this.a, 101))); // 3-101
             } else if (!this.bNew && this.a.g != null) {
                 this.bNew = true;
-                this.a((Packet) (new Packet18ArmAnimation(this.a, 2))); // 2-100
+                this.a((Packet) (new Packet18ArmAnimation(this.a, 100))); // 2-100
+            }
+
+            if (this.a instanceof EntityLiving) {
+                if (this.dNew && !this.a.m()) {
+                    this.dNew = false;
+                    this.b((Packet) (new Packet18ArmAnimation(this.a, 105)));
+                } else if (!this.dNew && this.a.m()) {
+                    this.dNew = true;
+                    this.b((Packet) (new Packet18ArmAnimation(this.a, 104)));
+                }
             }
 
             this.d = i;
@@ -104,6 +110,10 @@ public class EntityTrackerEntry {
             this.f = k;
             this.g = l;
             this.h = i1;
+        }
+
+        if (this.a.ENew) {
+            this.a.ENew = false;
         }
     }
 
@@ -114,6 +124,13 @@ public class EntityTrackerEntry {
             EntityPlayer entityplayer = (EntityPlayer) iterator.next();
 
             entityplayer.a.b(packet);
+        }
+    }
+
+    public void b(Packet packet) {
+        this.a(packet);
+        if (this.a instanceof EntityPlayer) {
+            ((EntityPlayer) this.a).a.b(packet);
         }
     }
 
@@ -142,8 +159,11 @@ public class EntityTrackerEntry {
                     }
                     entityplayer.a.b(spawn == null ? packet : spawn);
                     // ALPHACRAFT
+                    if (this.dNew) {
+                        entityplayer.a.b((Packet) (new Packet18ArmAnimation(this.a, 104)));
+                    }
                     if (this.bNew) {
-                        entityplayer.a.b((Packet) (new Packet18ArmAnimation(this.a, 2))); // 2-100
+                        entityplayer.a.b((Packet) (new Packet18ArmAnimation(this.a, 100))); // 2-100
                     }
                 }
             } else if (this.k.contains(entityplayer)) {
@@ -195,6 +215,10 @@ public class EntityTrackerEntry {
                 return new Packet23VehicleSpawn(this.a, 1);
             } else if (this.a instanceof IAnimal) {
                 return new Packet24MobSpawn((EntityLiving) this.a);
+            } else if (this.a instanceof EntityArrow) {
+                return new Packet23VehicleSpawn(this.a, 60);
+            } else if (this.a instanceof EntitySnowball) {
+                return new Packet23VehicleSpawn(this.a, 61);
             } else if (this.a instanceof EntityTNTPrimed) { // TODO check if NPE on clientside
                 return new Packet23VehicleSpawn(this.a, 50);
             } else {

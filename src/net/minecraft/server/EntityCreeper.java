@@ -6,6 +6,7 @@ public class EntityCreeper extends EntityMonster {
     int b;
     int ad = 30;
     int ae = -1;
+    int e = -1;
 
     public EntityCreeper(World world) {
         super(world);
@@ -20,8 +21,20 @@ public class EntityCreeper extends EntityMonster {
         super.b(nbttagcompound);
     }
 
-    protected void d_() {
+    public void b_() {
         this.b = this.a;
+        if (this.h.x) {
+        	this.a += this.ae;
+        	if (this.a < 0) {
+        		this.a = 0;
+        	}
+
+        	if (this.a >= this.ad) {
+        		this.a = this.ad;
+        	}
+        }
+
+        super.b_();
         if (this.a > 0 && this.ae < 0) {
             --this.a;
         }
@@ -33,6 +46,35 @@ public class EntityCreeper extends EntityMonster {
         super.d_();
         if (this.ae != 1) {
             this.ae = -1;
+        }
+    }
+
+    protected void d_() {
+    	if (this.e != this.ae) {
+            this.e = this.ae;
+            if (this.ae > 0) {
+                this.h.a(this, (byte) 4);
+            } else {
+                this.h.a(this, (byte) 5);
+            }
+        }
+
+        this.b = this.a;
+        if (this.h.x) {
+            super.d_();
+        } else {
+            if (this.a > 0 && this.ae < 0) {
+                --this.a;
+            }
+
+            if (this.ae >= 0) {
+                this.ae = 2;
+            }
+
+            super.d_();
+            if (this.ae != 1) {
+                this.ae = -1;
+            }
         }
     }
 

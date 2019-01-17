@@ -30,6 +30,10 @@ public class EntityTracker {
                     entitytrackerentry.a(entityplayer);
                 }
             }
+        } else if (entity instanceof EntityArrow) {
+            this.a(entity, 64, 5);
+        } else if (entity instanceof EntitySnowball) {
+            this.a(entity, 64, 5);
         } else if (entity instanceof EntityItem) {
             this.a(entity, 64, 20); //20
         } else if (entity instanceof EntityMinecart) {
@@ -100,6 +104,14 @@ public class EntityTracker {
 
         if (entitytrackerentry != null) {
             entitytrackerentry.a(packet);
+        }
+    }
+
+    public void b(Entity entity, Packet packet) {
+        EntityTrackerEntry entitytrackerentry = (EntityTrackerEntry) this.b.a(entity.c);
+
+        if (entitytrackerentry != null) {
+            entitytrackerentry.b(packet);
         }
     }
 

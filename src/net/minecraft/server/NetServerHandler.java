@@ -503,9 +503,12 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
     }
 
     public void a(Packet18ArmAnimation packet18armanimation) {
-    	System.out.println("Packet18ArmAnimation");
         if (packet18armanimation.b == 1) {
             this.e.z();
+        } else if (packet18armanimation.b == 104) {
+            this.e.al = true;
+        } else if (packet18armanimation.b == 105) {
+            this.e.al = false;
         }
     }
 

@@ -311,6 +311,19 @@ public class ServerConfigurationManager {
         }
     }
 
+    public void a(double d0, double d1, double d2, double d3, Packet packet) {
+        for (int i = 0; i < this.b.size(); ++i) {
+            EntityPlayer entityplayer = (EntityPlayer) this.b.get(i);
+            double d4 = d0 - entityplayer.l;
+            double d5 = d1 - entityplayer.m;
+            double d6 = d2 - entityplayer.n;
+
+            if (d4 * d4 + d5 * d5 + d6 * d6 < d3 * d3) {
+                entityplayer.a.b(packet);
+            }
+        }
+    }
+
     public void i(String s) {
         Packet3Chat packet3chat = new Packet3Chat(s);
 

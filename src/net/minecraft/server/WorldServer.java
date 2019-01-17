@@ -74,4 +74,10 @@ public class WorldServer extends World {
     public Entity a(int i) {
         return (Entity) this.E.a(i);
     }
+
+    public Explosion a(Entity entity, double d0, double d1, double d2, float f, boolean flag) {
+        Explosion explosion = super.a(entity, d0, d1, d2, f, flag);
+
+        return explosion;
+    }
 }

@@ -127,27 +127,31 @@ public class BlockLever extends Block {
     }
 
     public boolean a(World world, int i, int j, int k, EntityHuman entityhuman) {
-        int l = world.b(i, j, k);
-        int i1 = l & 7;
-        int j1 = 8 - (l & 8);
-
-        world.b(i, j, k, i1 + j1);
-        world.b(i, j, k, i, j, k);
-        world.a((double) i + 0.5D, (double) j + 0.5D, (double) k + 0.5D, "random.click", 0.3F, j1 > 0 ? 0.6F : 0.5F);
-        world.g(i, j, k, this.bc);
-        if (i1 == 1) {
-            world.g(i - 1, j, k, this.bc);
-        } else if (i1 == 2) {
-            world.g(i + 1, j, k, this.bc);
-        } else if (i1 == 3) {
-            world.g(i, j, k - 1, this.bc);
-        } else if (i1 == 4) {
-            world.g(i, j, k + 1, this.bc);
+    	if (world.x) {
+            return true;
         } else {
-            world.g(i, j - 1, k, this.bc);
-        }
+            int l = world.b(i, j, k);
+            int i1 = l & 7;
+            int j1 = 8 - (l & 8);
 
-        return true;
+            world.b(i, j, k, i1 + j1);
+            world.b(i, j, k, i, j, k);
+            world.a((double) i + 0.5D, (double) j + 0.5D, (double) k + 0.5D, "random.click", 0.3F, j1 > 0 ? 0.6F : 0.5F);
+            world.g(i, j, k, this.bc);
+            if (i1 == 1) {
+                world.g(i - 1, j, k, this.bc);
+            } else if (i1 == 2) {
+                world.g(i + 1, j, k, this.bc);
+            } else if (i1 == 3) {
+                world.g(i, j, k - 1, this.bc);
+            } else if (i1 == 4) {
+                world.g(i, j, k + 1, this.bc);
+            } else {
+                world.g(i, j - 1, k, this.bc);
+            }
+
+            return true;
+        }
     }
 
     public void b(World world, int i, int j, int k) {

@@ -30,6 +30,7 @@ public abstract class Entity {
     public boolean x;
     public boolean y;
     public boolean z;
+    public boolean ENew;
     public boolean A;
     public boolean B;
     public float C;
@@ -72,6 +73,7 @@ public abstract class Entity {
         this.v = AxisAlignedBB.a(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
         this.w = false;
         this.z = false;
+        this.ENew = false;
         this.A = true;
         this.B = false;
         this.C = 0.0F;
@@ -401,12 +403,12 @@ public abstract class Entity {
 
             d9 = this.l - d3;
             d10 = this.n - d4;
-            this.G = (float) ((double) this.G + (double) MathHelper.a(d9 * d9 + d10 * d10) * 0.6D);
             int l;
             int i1;
             int j1;
 
             if (this.H && !flag) {
+            	this.G = (float) ((double) this.G + (double) MathHelper.a(d9 * d9 + d10 * d10) * 0.6D);
                 l = MathHelper.b(this.l);
                 i1 = MathHelper.b(this.m - 0.20000000298023224D - (double) this.C);
                 j1 = MathHelper.b(this.n);
@@ -649,7 +651,7 @@ public abstract class Entity {
 
     // ALPHACRAFT
     protected void uNew() {
-        //this.z = true;
+        this.ENew = true;
     }
 
     public boolean a(Entity entity, int i) {

@@ -15,7 +15,8 @@ public class EntityPlayer extends EntityHuman {
     public List ag = new LinkedList();
     public Set ah = new HashSet();
     public double ai;
-    private int bu = -1;
+    public boolean al = false; // ALPHACRAFT
+    private int bu = -99999999;
     public boolean customClient;
 
     public EntityPlayer(MinecraftServer minecraftserver, World world, String s, ItemInWorldManager iteminworldmanager) {
@@ -111,9 +112,16 @@ public class EntityPlayer extends EntityHuman {
     }
 
     public void c(Entity entity, int i) {
-        if (!entity.B && entity instanceof EntityItem) {
-            this.a.b((Packet) (new Packet17AddToInventory(((EntityItem) entity).a, i)));
-            this.b.k.a(entity, new Packet22Collect(entity.c, this.c));
+        if (!entity.B) {
+        	if (entity instanceof EntityItem) {
+        		this.a.b((Packet) (new Packet17AddToInventory(((EntityItem) entity).a, i)));
+                this.b.k.a(entity, new Packet22Collect(entity.c, this.c));
+        	}
+
+            if (entity instanceof EntityArrow) {
+                this.a.b((Packet) (new Packet17AddToInventory(new ItemStack(Item.ARROW), 1)));
+                this.b.k.a(entity, new Packet22Collect(entity.c, this.c));
+            }
         }
 
         super.c(entity, i);
@@ -159,5 +167,9 @@ public class EntityPlayer extends EntityHuman {
 
     public void b(double d0, boolean flag) {
         super.a(d0, flag);
+    }
+
+    public boolean m() {
+        return this.al;
     }
 }

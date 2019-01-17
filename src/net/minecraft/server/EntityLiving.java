@@ -325,6 +325,7 @@ public class EntityLiving extends Entity {
 
                 this.aQ = 0.0F;
                 if (flag) {
+                	this.h.a(this, (byte) 2);
                     this.uNew();
                     if (entity != null) {
                         double d0 = entity.l - this.l;
@@ -735,7 +736,7 @@ public class EntityLiving extends Entity {
         float f1 = (float) (Math.atan2(d1, d0) * 180.0D / 3.1415927410125732D) - 90.0F;
         float f2 = (float) (Math.atan2(d2, d3) * 180.0D / 3.1415927410125732D);
 
-        this.s = this.b(this.s, f2, f);
+        this.s = -this.b(this.s, f2, f);
         this.r = this.b(this.r, f1, f);
     }
 

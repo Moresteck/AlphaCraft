@@ -23,7 +23,7 @@ public class EntityArrow extends Entity {
         super(world);
         this.ah = entityliving;
         this.a(0.5F, 0.5F);
-        this.c(entityliving.l, entityliving.m, entityliving.n, entityliving.r, entityliving.s);
+        this.c(entityliving.l, entityliving.m + (double) entityliving.p(), entityliving.n, entityliving.r, entityliving.s);
         this.l -= (double) (MathHelper.b(this.r / 180.0F * 3.1415927F) * 0.16F);
         this.m -= 0.10000000149011612D;
         this.n -= (double) (MathHelper.a(this.r / 180.0F * 3.1415927F) * 0.16F);
@@ -59,6 +59,13 @@ public class EntityArrow extends Entity {
 
     public void b_() {
         super.b_();
+        if (this.u == 0.0F && this.t == 0.0F) {
+            float f = MathHelper.a(this.o * this.o + this.q * this.q);
+
+            this.t = this.r = (float) (Math.atan2(this.o, this.q) * 180.0D / 3.1415927410125732D);
+            this.u = this.s = (float) (Math.atan2(this.p, (double) f) * 180.0D / 3.1415927410125732D);
+        }
+
         if (this.a > 0) {
             --this.a;
         }
@@ -220,10 +227,12 @@ public class EntityArrow extends Entity {
     }
 
     public void b(EntityHuman entityhuman) {
-        if (this.ag && this.ah == entityhuman && this.a <= 0 && entityhuman.aj.a(new ItemStack(Item.ARROW.aS, 1))) {
-            this.h.a(this, "random.pop", 0.2F, ((this.R.nextFloat() - this.R.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-            entityhuman.c(this, 1);
-            this.j();
+        if (!this.h.x) {
+        	if (this.ag && this.ah == entityhuman && this.a <= 0 && entityhuman.aj.a(new ItemStack(Item.ARROW.aS, 1))) {
+                this.h.a(this, "random.pop", 0.2F, ((this.R.nextFloat() - this.R.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                entityhuman.c(this, 1);
+                this.j();
+            }
         }
     }
 }
