@@ -75,6 +75,10 @@ public final class ItemStack {
     }
 
     public int b() {
+    	if (this.a() == null) {
+    		System.out.println("CHUJ KURWA");
+    		return 1;
+    	}
         return this.a().a();
     }
 

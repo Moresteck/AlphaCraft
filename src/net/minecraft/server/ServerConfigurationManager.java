@@ -120,7 +120,7 @@ public class ServerConfigurationManager {
             entityplayer1.a(entityplayer1.l, entityplayer1.m + 1.0D, entityplayer1.n);
         }
 
-        entityplayer1.a.d();
+        entityplayer1.a.updateInventory();
         entityplayer1.a.a(entityplayer1.l, entityplayer1.m, entityplayer1.n, entityplayer1.r, entityplayer1.s);
         this.d.a(entityplayer1);
         this.c.e.a(entityplayer1);

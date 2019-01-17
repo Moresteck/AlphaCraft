@@ -616,7 +616,7 @@ public class EntityMinecart extends Entity implements IInventory {
 
             if (itemstack != null && itemstack.c == Item.COAL.aS) {
                 if (--itemstack.a == 0) {
-                    entityhuman.aj.a(entityhuman.aj.d, (ItemStack) null);
+                    entityhuman.aj.a(entityhuman.aj.itemInHandIndex, (ItemStack) null);
                 }
 
                 this.af += 1200;

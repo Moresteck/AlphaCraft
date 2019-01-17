@@ -11,7 +11,7 @@ public abstract class Entity {
     public boolean e;
     public Entity f;
     public Entity g;
-    protected World h;
+    public World h;
     public double i;
     public double j;
     public double k;

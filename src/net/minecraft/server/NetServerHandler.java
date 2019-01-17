@@ -2,6 +2,8 @@ package net.minecraft.server;
 
 import java.util.logging.Logger;
 
+import pl.moresteck.alphacraft.PlayerSettings;
+
 public class NetServerHandler extends NetHandler implements ICommandListener {
 
     public static Logger a = Logger.getLogger("Minecraft");
@@ -183,7 +185,7 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
     }
 
     public void a(Packet14BlockDig packet14blockdig) {
-    	this.e.aj.a[this.e.aj.d] = this.k;
+    	this.e.aj.items[this.e.aj.itemInHandIndex] = this.k;
         boolean flag = this.d.e.z = this.d.f.g(this.e.aq);
         boolean flag1 = false;
 
@@ -310,9 +312,8 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
     }
 
     public void a(Packet15Place packet15place) {
-    	System.out.println("Packet15Place");
         boolean flag = this.d.e.z = this.d.f.g(this.e.aq);
-        int i = packet15place.b;
+        /*int i = packet15place.b;
         int j = packet15place.c;
         int k = packet15place.d;
         int l = packet15place.e;
@@ -323,14 +324,14 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
             j1 = i1;
         }
 
-        if (j1 > 16 || flag) {
+        if (j1 > 16 || flag) {*/
         // ALPHACRAFT
-        //if (packet15place.e == 255) {
+        if (packet15place.e == 255) {
             ItemStack itemstack = packet15place.a >= 0 ? new ItemStack(packet15place.a) : null;
 
-            this.e.ad.a(this.e, this.d.e, itemstack, i, j, k, l);
-            //this.e.ad.a(this.e, this.d.e, itemstack);
-        }/* else {
+            //this.e.ad.a(this.e, this.d.e, itemstack, i, j, k, l);
+            this.e.ad.a(this.e, this.d.e, itemstack);
+        } else {
         	int i = packet15place.b;
             int j = packet15place.c;
             int k = packet15place.d;
@@ -374,9 +375,9 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
             }
 
             this.e.a.b((Packet) (new Packet53BlockChange(i, j, k, this.d.e)));
-        }*/
+        }
 
-        this.e.a.b((Packet) (new Packet53BlockChange(i, j, k, this.d.e)));
+        //this.e.a.b((Packet) (new Packet53BlockChange(i, j, k, this.d.e)));
         this.d.e.z = false;
     }
 
@@ -399,14 +400,14 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
     public void a(Packet16BlockItemSwitch packet16blockitemswitch) {
         int i = packet16blockitemswitch.b;
 
-        this.e.aj.d = this.e.aj.a.length - 1;
+        this.e.aj.itemInHandIndex = this.e.aj.items.length - 1;
         if (i == 0) {
             this.k = null;
         } else {
             this.k = new ItemStack(i);
         }
 
-        this.e.aj.a[this.e.aj.d] = this.k;
+        this.e.aj.items[this.e.aj.itemInHandIndex] = this.k;
         this.d.k.a(this.e, new Packet16BlockItemSwitch(this.e.c, i));
     }
 
@@ -465,9 +466,46 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
                     this.b((Packet) (new Packet3Chat("\u00A7cThere\'s no player by that name online.")));
                 }
             }
+        } else if (s.toLowerCase().startsWith("/int ")) {
+        	String[] astring = s.split(" ");
+
+        	if (astring[1].equalsIgnoreCase("eat")) {
+        		PlayerSettings settings = this.e.settings;
+        		boolean set = !settings.getEatFood();
+        		settings.setEatFood(set);
+        		if (set) {
+        			this.b((Packet) (new Packet3Chat("\u00A7aWlaczono jedzenie")));
+        		} else {
+        			this.b((Packet) (new Packet3Chat("\u00A7cWylaczono jedzenie")));
+        		}
+        	}
+        	if (astring[1].equalsIgnoreCase("bow")) {
+        		PlayerSettings settings = this.e.settings;
+        		boolean set = !settings.getArrowShoot();
+        		settings.setArrowShoot(set);
+        		if (set) {
+        			this.b((Packet) (new Packet3Chat("\u00A7aWlaczono strzelanie z luku")));
+        		} else {
+        			this.b((Packet) (new Packet3Chat("\u00A7cWylaczono strzelanie z luku")));
+        		}
+        	}
+        	if (astring[1].equalsIgnoreCase("shear")) {
+        		PlayerSettings settings = this.e.settings;
+        		boolean set = !settings.getSheepShear();
+        		settings.setSheepShear(set);
+        		if (set) {
+        			this.b((Packet) (new Packet3Chat("\u00A7aWlaczono golenie owiec")));
+        		} else {
+        			this.b((Packet) (new Packet3Chat("\u00A7cWylaczono golenie owiec")));
+        		}
+        	}
         } else {
             int i;
-            if (s.toLowerCase().equalsIgnoreCase("/iron")) {
+            if (s.toLowerCase().equalsIgnoreCase("/int")) {
+            	this.b((Packet) (new Packet3Chat("\u00A7e/int eat - Jedz przy uderzeniu zywnoscia")));
+            	this.b((Packet) (new Packet3Chat("\u00A7e/int bow - Strzelaj przy uderzeniu lukiem")));
+            	this.b((Packet) (new Packet3Chat("\u00A7e/int shear - Gól owce przy uderzeniu mieczem")));
+            } else if (s.toLowerCase().equalsIgnoreCase("/iron")) {
                 if (MinecraftServer.b.containsKey(this.e.aq)) {
                     a.info(this.e.aq + " failed to iron!");
                     this.b((Packet) (new Packet3Chat("\u00A7cYou can\'t /iron again so soon!")));
@@ -537,22 +575,22 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
 
     public void a(Packet5PlayerInventory packet5playerinventory) {
         if (packet5playerinventory.a == -1) {
-            this.e.aj.a = packet5playerinventory.b;
+            this.e.aj.items = packet5playerinventory.b;
         }
 
         if (packet5playerinventory.a == -2) {
-            this.e.aj.c = packet5playerinventory.b;
+            this.e.aj.crafting = packet5playerinventory.b;
         }
 
         if (packet5playerinventory.a == -3) {
-            this.e.aj.b = packet5playerinventory.b;
+            this.e.aj.armor = packet5playerinventory.b;
         }
     }
 
-    public void d() {
-        this.b.a((Packet) (new Packet5PlayerInventory(-1, this.e.aj.a)));
-        this.b.a((Packet) (new Packet5PlayerInventory(-2, this.e.aj.c)));
-        this.b.a((Packet) (new Packet5PlayerInventory(-3, this.e.aj.b)));
+    public void updateInventory() {
+        this.b.a((Packet) (new Packet5PlayerInventory(-1, this.e.aj.items)));
+        this.b.a((Packet) (new Packet5PlayerInventory(-2, this.e.aj.crafting)));
+        this.b.a((Packet) (new Packet5PlayerInventory(-3, this.e.aj.armor)));
     }
 
     public void a(Packet59ComplexEntity packet59complexentity) {

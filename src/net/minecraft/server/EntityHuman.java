@@ -48,7 +48,7 @@ public class EntityHuman extends EntityLiving {
 
     public void y() {
         if (this.h.l == 0 && this.aM < 20 && this.S % 20 * 4 == 0) {
-            this.a(1);
+            this.restoreHealth(1);
         }
 
         this.aj.c();
@@ -249,7 +249,7 @@ public class EntityHuman extends EntityLiving {
     }
 
     public void C() {
-        this.aj.a(this.aj.d, (ItemStack) null);
+        this.aj.a(this.aj.itemInHandIndex, (ItemStack) null);
     }
 
     public double x() {

@@ -221,12 +221,6 @@ public class EntityTrackerEntry {
                 return new Packet23VehicleSpawn(this.a, 1);
             } else if (this.a instanceof IAnimal) {
                 return new Packet24MobSpawn((EntityLiving) this.a);
-            } else if (this.a instanceof EntityArrow) {
-                return new Packet23VehicleSpawn(this.a, 60);
-            } else if (this.a instanceof EntitySnowball) {
-                return new Packet23VehicleSpawn(this.a, 61);
-            } else if (this.a instanceof EntityTNTPrimed) { // TODO check if NPE on clientside
-                return new Packet23VehicleSpawn(this.a, 50);
             } else {
                 throw new IllegalArgumentException("Don\'t know how to add " + this.a.getClass() + "!");
             }

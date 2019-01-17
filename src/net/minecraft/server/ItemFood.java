@@ -11,8 +11,10 @@ public class ItemFood extends Item {
     }
 
     public ItemStack a(ItemStack itemstack, World world, EntityHuman entityhuman) {
-        --itemstack.a;
-        entityhuman.a(this.a);
+        if (entityhuman.aj.bNew(this.aS)) {
+        	entityhuman.restoreHealth(this.a);
+        }
+
         return itemstack;
     }
 }

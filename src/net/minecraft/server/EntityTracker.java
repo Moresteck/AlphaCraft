@@ -30,20 +30,14 @@ public class EntityTracker {
                     entitytrackerentry.a(entityplayer);
                 }
             }
-        } else if (entity instanceof EntityArrow) {
-            this.a(entity, 64, 5);
-        } else if (entity instanceof EntitySnowball) {
-            this.a(entity, 64, 5);
         } else if (entity instanceof EntityItem) {
             this.a(entity, 64, 20); //20
         } else if (entity instanceof EntityMinecart) {
-            this.a(entity, 160, 5); //4
+            this.a(entity, 160, 4); //4
         } else if (entity instanceof EntityBoat) {
-            this.a(entity, 160, 5); //4
+            this.a(entity, 160, 4); //4
         } else if (entity instanceof IAnimal) {
-            this.a(entity, 160, 3); //2
-        } else if (entity instanceof EntityTNTPrimed) {
-            this.a(entity, 160, 10);
+            this.a(entity, 160, 2); //2
         }
     }
 

@@ -12,7 +12,7 @@ public class WorldServer extends World {
     private boolean B;
     private SpawnerCreature C = new SpawnerMonsters(this, 200, IMonster.class, new Class[] { EntityZombie.class, EntitySkeleton.class, EntityCreeper.class, EntitySpider.class, EntitySlime.class});
     private SpawnerCreature D = new SpawnerCreature(15, EntityAnimal.class, new Class[] { EntitySheep.class, EntityPig.class, EntityCow.class, EntityChicken.class});
-    private MinecraftServer server;
+    public MinecraftServer server;
     private EntityList E = new EntityList(); // ALPHACRAFT
 
     public WorldServer(MinecraftServer minecraftserver, File file1, String s, boolean flag) {

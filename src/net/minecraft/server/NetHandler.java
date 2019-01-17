@@ -75,6 +75,7 @@ public class NetHandler {
     }
 
     public void a(Packet17AddToInventory packet17addtoinventory) {
+    	System.out.println("ADD_TO_INVENTORY");
         this.a((Packet) packet17addtoinventory);
     }
 
@@ -99,6 +100,7 @@ public class NetHandler {
     }
 
     public void a(Packet5PlayerInventory packet5playerinventory) {
+    	System.out.println("INVENTORY");
         this.a((Packet) packet5playerinventory);
     }
 

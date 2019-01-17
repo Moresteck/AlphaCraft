@@ -10,6 +10,20 @@ public class EntityCreature extends EntityLiving {
         super(world);
     }
 
+    public boolean a(Entity entity, int i) {
+    	super.a(entity, i);
+    	if (this.aM <= 0 && !this.B) {
+    		int ran = this.h.m.nextInt(3);
+        	EntityItem item = this.a(this.g(), ran, 1.0F);
+
+        	item.p += (double) (this.R.nextFloat() * 0.05F);
+        	item.o += (double) ((this.R.nextFloat() - this.R.nextFloat()) * 0.1F);
+        	item.q += (double) ((this.R.nextFloat() - this.R.nextFloat()) * 0.1F);
+        	this.j();
+    	}
+    	return true;
+    }
+
     protected void d_() {
         this.ah = false;
         float f = 16.0F;

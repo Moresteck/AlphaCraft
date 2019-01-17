@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import pl.moresteck.alphacraft.PlayerSettings;
+
 public class EntityPlayer extends EntityHuman {
 
     public NetServerHandler a;
@@ -18,10 +20,12 @@ public class EntityPlayer extends EntityHuman {
     public boolean al = false; // ALPHACRAFT
     private int bu = -99999999;
     private int bw = 60;
-    public boolean customClient;
+    public PlayerSettings settings; // ALPHACRAFT
+    public boolean customClient; // ALPHACRAFT
 
     public EntityPlayer(MinecraftServer minecraftserver, World world, String s, ItemInWorldManager iteminworldmanager) {
         super(world);
+        this.settings = new PlayerSettings(s); // ALPHACRAFT
         int i = world.n; // ALPHACRAFT - exact spawn
         int j = world.p;
         int k = world.d(i, j);
@@ -62,8 +66,8 @@ public class EntityPlayer extends EntityHuman {
         return super.a(entity, i);
     }
 
-    public void a(int i) {
-    	super.a(i);
+    public void restoreHealth(int i) {
+    	super.restoreHealth(i);
     }
 
     public void i() {
@@ -106,7 +110,7 @@ public class EntityPlayer extends EntityHuman {
         }
 
         if (this.aM != this.bu) { // ALPHACRAFT
-            this.a.b((Packet) (new Packet3Chat("Your health: " + this.aM + " / 20")));
+            this.a.b((Packet) (new Packet3Chat("Zdrowie: " + this.aM + " / 20")));
             this.bu = this.aM;
         }
     }
@@ -134,6 +138,15 @@ public class EntityPlayer extends EntityHuman {
     }
 
     public void z() {
+    	ItemStack hand = this.aj.b();
+    	if (hand == null) {
+    	} else if (hand.a() instanceof ItemBow && this.settings.getArrowShoot()) {
+    		((ItemBow) hand.a()).a(hand, this.h, this);
+    		this.a.updateInventory();
+    	} else if (hand.a() instanceof ItemFood && this.settings.getEatFood()) {
+    		((ItemFood) hand.a()).a(hand, this.h, this);
+    		this.a.updateInventory();
+    	}
         if (!this.ao) {
             this.ap = -1;
             this.ao = true;

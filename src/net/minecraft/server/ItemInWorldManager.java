@@ -106,9 +106,9 @@ public class ItemInWorldManager {
         if (itemstack1 == itemstack && (itemstack1 == null || itemstack1.a == i)) {
             return false;
         } else {
-            entityhuman.aj.a[entityhuman.aj.d] = itemstack1;
+            entityhuman.aj.items[entityhuman.aj.itemInHandIndex] = itemstack1;
             if (itemstack1.a == 0) {
-                entityhuman.aj.a[entityhuman.aj.d] = null;
+                entityhuman.aj.items[entityhuman.aj.itemInHandIndex] = null;
             }
 
             return true;

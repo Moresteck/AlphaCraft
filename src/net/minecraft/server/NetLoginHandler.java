@@ -84,7 +84,7 @@ public class NetLoginHandler extends NetHandler {
             this.e.f.a((Packet) (new Packet3Chat("\u00A7e" + entityplayer.aq + " joined the game.")));
             this.e.f.a(entityplayer); // psuja
             netserverhandler.a(entityplayer.l, entityplayer.m, entityplayer.n, entityplayer.r, entityplayer.s);
-            netserverhandler.d();
+            netserverhandler.updateInventory();
             this.e.c.a(netserverhandler);
             netserverhandler.b((Packet) (new Packet4UpdateTime(this.e.e.c)));
         }

@@ -285,7 +285,7 @@ public class EntityLiving extends Entity {
         super.a(f, f1);
     }
 
-    public void a(int i) {
+    public void restoreHealth(int i) {
         if (this.aM > 0) {
             this.aM += i;
             if (this.aM > 20) {
