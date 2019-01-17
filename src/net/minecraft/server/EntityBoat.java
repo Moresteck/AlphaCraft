@@ -69,9 +69,7 @@ public class EntityBoat extends Entity {
 
         return true;*/
     	// ALPHACRAFT
-        if (this.h.x) {
-            return true;
-        } else {
+    	if (!this.h.x && !this.B) {
             this.ad = -this.ad;
             this.b = 10;
             this.a += i * 10;
@@ -91,6 +89,8 @@ public class EntityBoat extends Entity {
             }
 
             return true;
+        } else {
+        	return true;
         }
     }
 

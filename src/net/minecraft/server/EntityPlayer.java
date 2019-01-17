@@ -17,6 +17,7 @@ public class EntityPlayer extends EntityHuman {
     public double ai;
     public boolean al = false; // ALPHACRAFT
     private int bu = -99999999;
+    private int bw = 60;
     public boolean customClient;
 
     public EntityPlayer(MinecraftServer minecraftserver, World world, String s, ItemInWorldManager iteminworldmanager) {
@@ -34,13 +35,18 @@ public class EntityPlayer extends EntityHuman {
         this.C = 0.0F;
     }
 
-    public void b_() {}
+    public void b_() {
+    	--this.bw;
+    }
 
     public void f(Entity entity) {
     	this.aj.f();
     }
 
     public boolean a(Entity entity, int i) {
+    	if (this.bw > 0) {
+    		return false;
+    	}
     	if (entity instanceof EntityHuman) {
             return false;
         }

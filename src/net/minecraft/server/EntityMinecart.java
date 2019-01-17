@@ -63,9 +63,7 @@ public class EntityMinecart extends Entity implements IInventory {
     }
 
     public boolean a(Entity entity, int i) {
-        if (this.h.x) {
-        	return true;
-        } else {
+    	if (!this.h.x && !this.B) {
         	this.ad = -this.ad;
             this.b = 10;
             this.uNew();
@@ -82,6 +80,8 @@ public class EntityMinecart extends Entity implements IInventory {
             }
 
             return true;
+        } else {
+        	return true;
         }
     }
 

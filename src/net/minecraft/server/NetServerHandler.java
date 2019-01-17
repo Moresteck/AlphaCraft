@@ -83,8 +83,14 @@ public class NetServerHandler extends NetHandler implements ICommandListener {
                 this.e.b(d1, d2, d3, f, f1);
                 this.e.o = d5;
                 this.e.q = d4;
-                this.d.e.b(this.e.g, true);
-                this.e.g.w();
+                if (this.e.g != null) {
+                	this.d.e.b(this.e.g, true);
+                }
+
+                if (this.e.g != null) {
+                	this.e.g.w();
+                }
+
                 this.d.f.b(this.e);
                 this.g = this.e.l;
                 this.h = this.e.m;
